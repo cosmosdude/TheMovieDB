@@ -7,6 +7,7 @@
 
 import Foundation
 import Alamofire
+import Reachability
 
 enum NetworkConfiguration {
     
@@ -17,6 +18,12 @@ enum NetworkConfiguration {
         )
             
         AF.sessionConfiguration.urlCache = nil
+        
+        try! Reachability.network.startNotifier()
+        Reachability.network.whenReachable = { reachability in
+            NotificationCenter.default
+                .post(name: ReachabilityEvent.reachable, object: nil)
+        }
     }
     
 }

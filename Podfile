@@ -13,6 +13,7 @@ target 'Movies' do
 
   pod 'RxSwift'
   pod 'RxCocoa'
+  pod 'ReachabilitySwift'
 
   target 'MoviesTests' do
     inherit! :search_paths

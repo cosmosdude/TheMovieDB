@@ -6,8 +6,9 @@
 //
 
 import Foundation
+import RxSwift
 
-class MovieDetailInteractor: MovieDetailInteractoProtocol {
+class MovieDetailInteractor: MovieDetailInteractorProtocol {
     
     var movieId: Int
     var output: MovieDetailPresenterProtocol?

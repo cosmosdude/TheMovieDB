@@ -23,6 +23,7 @@ class MovieListViewController: UIViewController, MovieListViewProtocol {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         output?.getPopularMoviesIfCached()
         output?.getUpcomingMoviesIfCached()
         
@@ -40,6 +41,15 @@ class MovieListViewController: UIViewController, MovieListViewProtocol {
                 self?.coordinator?.showDetail(id: item.id)
             })
             .disposed(by: disposeBag)
+        
+        NotificationCenter.default
+            .rx.notification(ReachabilityEvent.reachable)
+            .subscribe { [weak self] _ in
+                self?.popularListView?.render(loading: true)
+                self?.upcomingListView?.render(loading: true)
+                self?.output?.getPopularMovies()
+                self?.output?.getUpcomingMovies()
+            }.disposed(by: disposeBag)
     }
     
     private func hookToggle(_ hook: Observable<MovieViewModel>) {
@@ -80,9 +90,7 @@ extension MovieListViewController {
         offlineIndicator.isHidden = !flag
     }
     
-    func render(error: String) {
-        
-    }
+    func render(error: String) { }
     
     func render(updated movie: MovieViewModel) {
         popularListView.update(model: movie)

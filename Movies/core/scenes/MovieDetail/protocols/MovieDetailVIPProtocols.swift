@@ -6,27 +6,35 @@
 //
 
 import Foundation
+import RxSwift
+import RxCocoa
+
+// MARK:- View
 
 protocol MovieDetailViewProtocol: AnyObject {
     
-    var output: MovieDetailInteractoProtocol? { get set }
+    var output: MovieDetailInteractorProtocol? { get set }
+    
+    var offlineState: Driver<Bool>! { get set }
+    var viewModelChange: Driver<MovieDetailViewModel>! { get set }
     
     func render(viewModel: MovieDetailViewModel)
     
-    func render(offline flag: Bool)
-    
 }
 
-protocol MovieDetailInteractoProtocol: AnyObject {
+
+// MARK:- Interactor
+protocol MovieDetailInteractorProtocol: AnyObject {
     
     var output: MovieDetailPresenterProtocol? { get set }
     
     func getCachedMovieDetail()
     func getMovieDetail()
-    
     func toggleFavourite()
 }
 
+
+// MARK:- Presenter
 protocol MovieDetailPresenterProtocol: AnyObject {
     
     var output: MovieDetailViewProtocol? { get set }
@@ -34,5 +42,7 @@ protocol MovieDetailPresenterProtocol: AnyObject {
     func handle(movie: MovieDAO)
     
     func handle(offline flag: Bool)
+    
+    func bind(to: MovieDetailViewProtocol?)
     
 }

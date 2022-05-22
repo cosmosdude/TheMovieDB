@@ -128,7 +128,7 @@ extension MovieListCollectionView: UICollectionViewDelegateFlowLayout {
         sizeForItemAt indexPath: IndexPath
     ) -> CGSize {
         CGSize(
-            width: collectionView.frame.size.width / 2,
+            width: collectionView.frame.size.width * 0.75,
             height: collectionView.frame.size.height
         )
     }

@@ -33,8 +33,10 @@ class MovieDetailCoordinator: Coordinator {
         
         view?.output = interactor
         interactor.output = presenter
+        
         presenter.output = view
-    
+        presenter.bind(to: view)
+        
         let viewController = vc as? MovieDetailViewController
         viewController?.coordinator = self
         navigation.pushViewController(vc, animated: true)

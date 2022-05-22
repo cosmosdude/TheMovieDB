@@ -9,10 +9,10 @@ import Foundation
 
 struct MovieDetailViewModel {
     
-    var image: URL?
-    var title: String
-    var isFavourite: Bool
-    var rating: String
-    var description: String
+    var image: URL? = nil
+    var title: String = ""
+    var isFavourite: Bool = false
+    var rating: String = ""
+    var description: String = ""
     
 }
